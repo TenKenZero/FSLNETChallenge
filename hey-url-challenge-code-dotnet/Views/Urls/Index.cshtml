@@ -21,7 +21,7 @@
                     </div>
                     <div class="row">
                         <div class="col m6 offset-m2">
-                            <input type="text" class="validate form-control" placeholder="Your original URL here"/>
+                            <input name="fullUrl" type="text" class="validate form-control" placeholder="Your original URL here"/>
                         </div>
                         <div class="col m2">
                             <button type="submit" class="btn">Shorten URL</button>
@@ -43,12 +43,15 @@
         </tr>
     </thead>
     <tbody>
+        @{
+            var homeUrl = ViewBag.homeUrl;
+        }
         @foreach (var url in Model.Urls)
         {
             <tr>
-                <th scope="row"><a href="https://localhost:5001/ABCDE">https://localhost:5001/ABCDE</a></th>
-                <td><a href="https://drive.google.com/file/d/1VdLgSSMojWFb1GRoBAFX_eXy7oX2J">drive.google.com/file/d/1VdLgSS...</a></td>
-                <td><!-- Please match the same format -->Feb 24, 2021</td>
+                <th scope="row"><a href=@String.Format("/{0}", url.ShortUrl)>@String.Format("{0}/{1}", homeUrl, url.ShortUrl)</a></th>
+                <td><a href=@url.FullUrl>@url.FullUrl</a></td>
+                <td>@url.DateCreation</td>
                 <td>@url.Count</td>
                 <td>
                     <a href=@string.Format("/urls/{0}", url.ShortUrl)>

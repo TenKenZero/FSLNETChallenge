@@ -1,3 +1,5 @@
+using hey_url_challenge_code_dotnet.Data.Repository;
+using hey_url_challenge_code_dotnet.Data.Repository.IRepository;
 using HeyUrlChallengeCodeDotnet.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +24,8 @@ namespace HeyUrlChallengeCodeDotnet
         {
             services.AddBrowserDetection();
             services.AddControllersWithViews();
-            services.AddDbContext<ApplicationContext>(options => options.UseInMemoryDatabase(databaseName: "HeyUrl"));
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IWorkContainer, WorkContainer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

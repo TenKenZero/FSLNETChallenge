@@ -7,5 +7,8 @@ namespace hey_url_challenge_code_dotnet.ViewModels
     {
         public IEnumerable<Url> Urls { get; set; }
         public Url NewUrl { get; set; }
+
+        public IEnumerable<Click> Clicks { get; set; }
+        public Click NewClick { get; set; }
     }
 }
